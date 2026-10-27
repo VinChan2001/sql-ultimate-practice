@@ -66,6 +66,58 @@ select country, sum(score) as total_score, count(*) as total_customers
 from customers
 group by country;
 
+-- find total score per country with a condition
+select country, sum(score) as total_score
+from customers
+group by country
+having sum(score) > 800;
+
+-- when to use having and where 
+-- where is used to filter rows before aggregation
+-- having is used to filter groups after aggregation
+-- example:
+select country, sum(score) as total_score
+from customers
+where score > 400
+group by country
+having sum(score) > 800;
+
+-- what this does 
+-- 1. Filters out rows where the score is not greater than 400
+-- 2. Groups the remaining rows by country
+-- 3. Calculates the total score for each country
+-- 4. Filters out groups where the total score is not greater than 800
+-- 5. Returns the remaining groups with their total scores
+
+-- find the average score for each country, considering only customers scores not equal to 0
+-- and return only those countries with an average score greater than 430
+
+select country, avg(score) as average_score
+from customers
+where score != 0
+group by country
+having avg(score)> 430; 
+
+-- example queries for distinct keyword
+select distinct country
+from customers;
+
+select distinct first_name
+from customers;
+
+-- group by automatically does distinct on the grouped columns
+
+select country, first_name
+from customers
+group by country, first_name; 
+-- gives you distinct combinations of country and first_name
+
+use MyDatabase;
+
+select top 4 * -- is for the columns just like any other query
+from customers;
+
+
 
 
 
