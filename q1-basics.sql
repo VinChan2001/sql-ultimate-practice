@@ -117,9 +117,79 @@ use MyDatabase;
 select top 4 * -- is for the columns just like any other query
 from customers;
 
+-- get the two most recent orders
+select top 2 *
+from orders
+order by order_date desc;
+
+-- create a table called persons 
+CREATE TABLE persons (
+    id INT NOT NULL,
+    person_name VARCHAR(50) NOT NULL,
+    birth_date DATE,
+    phone VARCHAR(15) NOT NULL,
+    CONSTRAINT pk_persons PRIMARY KEY (id)
+);
 
 
+USE MyDatabase;
+DROP TABLE persons;
+
+-- INSERT INTO table_name (column1, column2, column3, ...) if no columns are specified, values must be provided for all columns in the table
+-- VALUES (value1, value2, value3, ...); -- match the order of the columns with the order of the values
 
 
+INSERT INTO Customers (id, first_name, country, score)
+VALUES (6, 'Anna', 'USA', NULL), 
+       (7, 'Sam', NULL, 100);
 
+
+INSERT INTO customers (id, first_name, country, score)
+VALUES (8, 'USA', 'MAX', NULL);
+
+INSERT INTO customers
+VALUES (9, 'abdy', 'Germany', NULL);
+
+INSERT INTO customers (id, first_name)
+VALUES
+(10, 'John');
+
+INSERT INTO persons (id, person_name, birth_date, phone)
+SELECT id, first_name, NULL, 'Unknown'
+FROM customers;
+
+-- change the score of customer with id 6 to 0
+
+UPDATE customers
+SET score = 0
+where id = 6;
+
+select * from customers;
+
+-- change the score of customer with id 10 to 0 and country to UK
+
+UPDATE customers
+SET score = 0, country = 'UK'
+WHERE id = 10;
+
+select * from customers;
+
+-- update all customers with a score of NULL to have a score of 0
+
+UPDATE customers
+SET score = 0
+WHERE score IS NULL;
+
+SELECT * FROM CUSTOMERS;
+
+-- delete all the customers with id greater than 5
+DELETE FROM Customers
+WHERE id > 5;
+
+select * from customers;
+
+-- delete all data from table persons
+
+DELETE FROM persons;
+select * from persons;
 
